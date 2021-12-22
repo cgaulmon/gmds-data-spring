@@ -13,6 +13,7 @@ public interface IUnitService {
 	List<UnitDto> findAllInactiveReserveUnits();
 	Unit convertToEntity(UnitDto unitDto);
 	UnitDto convertToDto(Unit unit);
+	UnitDto save(UnitDto unit);
 	
 	
 	

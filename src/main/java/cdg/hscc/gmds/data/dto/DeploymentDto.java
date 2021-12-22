@@ -7,12 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode
-public class EquipmentDto extends UnitDto {
-	
+public class DeploymentDto {
+
 	private Long id;
-	private String name;
-	private int qty;
-	private String status;
-	private String type;
-	private long unitId;
+	private Integer countryId;
+	private Integer unitId;
+	private int unitQty;
 }

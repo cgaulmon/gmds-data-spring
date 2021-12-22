@@ -6,11 +6,13 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import cdg.hscc.gmds.data.dto.UnitDto;
 import cdg.hscc.gmds.data.entity.Unit;
 import cdg.hscc.gmds.data.repository.UnitRepository;
 
+@Service
 public class EquipmentService implements IUnitService {
 
 	private UnitRepository unitRepository;
@@ -25,10 +27,7 @@ public class EquipmentService implements IUnitService {
 
 	@Override
 	public List<UnitDto> findAll() {
-		return unitRepository.findAll()
-				.stream()
-				.map(this::convertToDto)
-				.collect(Collectors.toList());
+		return findAllActiveReserveUnits();
 	}
 
 	@Override
@@ -64,6 +63,11 @@ public class EquipmentService implements IUnitService {
 	@Override
 	public UnitDto convertToDto(Unit unit) {
 		return this.mapper.map(unit, UnitDto.class);
+	}
+
+	@Override
+	public UnitDto save(UnitDto unitDto) {
+		return convertToDto(unitRepository.save(convertToEntity(unitDto)));
 	}
 
 }

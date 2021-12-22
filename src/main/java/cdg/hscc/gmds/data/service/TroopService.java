@@ -27,10 +27,7 @@ public class TroopService implements IUnitService {
 
 	@Override
 	public List<UnitDto> findAll() {
-		return unitRepository.findAll()
-				.stream()
-				.map(this::convertToDto)
-				.collect(Collectors.toList());
+		return findAllActiveReserveUnits();
 	}
 
 	@Override
@@ -66,6 +63,11 @@ public class TroopService implements IUnitService {
 	@Override
 	public UnitDto convertToDto(Unit unit) {
 		return this.mapper.map(unit, UnitDto.class);
+	}
+
+	@Override
+	public UnitDto save(UnitDto unitDto) {
+		return convertToDto(unitRepository.save(convertToEntity(unitDto)));
 	}
 
 }

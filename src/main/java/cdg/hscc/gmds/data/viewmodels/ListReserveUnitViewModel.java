@@ -11,7 +11,7 @@ public class ListReserveUnitViewModel {
 	private String status;
 	private String type;
 	private Integer qty;
-	private String graphic;
+	private String iconLink;
 	
 	public ListReserveUnitViewModel() {
 		
@@ -21,8 +21,8 @@ public class ListReserveUnitViewModel {
 		this.id = unit.getId();
 		this.name = unit.getName();
 		this.status = unit.getStatus();
-		this.type = unit.getType();
+		this.type = unit.getUnitType();
 		this.qty = unit.getQty();
-		this.graphic = unit.getGraphic();
+		this.iconLink = unit.getIconLink();
 	}
 }

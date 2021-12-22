@@ -11,10 +11,10 @@ public class UnitDto {
 
 	private Long id;
 	private String name;
-	private int qty;
+	private Integer qty;
 	private String status;
-	private String type;
-	private long unitId;
-	private String graphic;
+	private String unitType;
+	private Integer unitId;
+	private String iconLink;
 	
 }

@@ -7,13 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode
-public class TroopDto extends UnitDto {
-	
+public class CountryDto {
+
 	private Long id;
+	private Integer countryId;
 	private String name;
-	private int qty;
+	private String mapLink;
 	private String status;
-	private String type;
-	private long unitId;
-	
 }
