@@ -1,10 +1,9 @@
-package cdg.hscc.gmds.data.viewmodels;
+package cdg.hscc.gmds.data.dto;
 
-import cdg.hscc.gmds.data.dto.UnitDto;
 import lombok.Data;
 
 @Data
-public class ListReserveUnitViewModel {
+public class ListReserveUnitsDto {
 
 	private Long id;
 	private String name;
@@ -13,11 +12,11 @@ public class ListReserveUnitViewModel {
 	private Integer qty;
 	private String iconLink;
 	
-	public ListReserveUnitViewModel() {
+	public ListReserveUnitsDto() {
 		
 	}
 	
-	public ListReserveUnitViewModel(UnitDto unit) {
+	public ListReserveUnitsDto(UnitDto unit) {
 		this.id = unit.getId();
 		this.name = unit.getName();
 		this.status = unit.getStatus();

@@ -14,6 +14,13 @@ public interface IUnitService {
 	Unit convertToEntity(UnitDto unitDto);
 	UnitDto convertToDto(Unit unit);
 	UnitDto save(UnitDto unit);
+	List<UnitDto> findAllTroops();
+	List<UnitDto> findAllEquipment();
+	List<UnitDto> findAllActiveReserveEquipment();
+	List<UnitDto> findAllActiveReserveTroops();
+	List<UnitDto> findAllActiveInactiveReserveEquipment();
+	List<UnitDto> findAllActiveInactiveReserveTroops();
+	UnitDto findByUnitId(int unitId);
 	
 	
 	

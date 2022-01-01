@@ -19,3 +19,15 @@ CREATE TABLE IF NOT EXISTS DEPLOYMENTS(
 	COUNTRY_ID INT NOT NULL,
 	UNIT_ID INT NOT NULL,
 	UNIT_QTY INT NOT NULL);
+	
+CREATE OR REPLACE VIEW V_MANAGE_COUNTRIES AS (
+select c.id, c.country_id, c.map_link, c.name, c.status,
+(select count(1) from deployments d where d.country_id = c.country_id) as deploy_count
+from countries c);
+
+CREATE OR REPLACE VIEW V_COUNTRY_DEPLOYMENTS AS (
+select c.country_id,  c.name, c.map_link, count(c.country_id) as num_of_deployments, sum(unit_qty) as total_qty
+from countries c
+join deployments d
+on d.country_id = c.country_id
+group by d.country_id);
