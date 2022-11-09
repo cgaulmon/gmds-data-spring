@@ -1,4 +1,4 @@
-package cdg.hscc.gmds.data.controller;
+package cdg.hscc.gmds.data.rest.controller;
 
 import java.util.List;
 
@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import cdg.hscc.gmds.data.dto.CountryDeploymentsDto;
 import cdg.hscc.gmds.data.dto.CountryDto;
 import cdg.hscc.gmds.data.dto.ManageCountryDto;
+import cdg.hscc.gmds.data.entity.VCountryDeployments;
 import cdg.hscc.gmds.data.service.CountryService;
 import cdg.hscc.gmds.data.service.ICountryService;
 
 
 @RestController
-@RequestMapping("/countries")
+@RequestMapping("/api/countries")
 public class CountryController {
 
 	private ICountryService countryService;
@@ -25,8 +25,6 @@ public class CountryController {
 		super();
 		this.countryService = countryService;
 	}
-
-
 
 	@GetMapping
 	public ResponseEntity<List<CountryDto>> findAll() {
@@ -44,7 +42,12 @@ public class CountryController {
 	}
 	
 	@GetMapping("/deployments")
-	public ResponseEntity<List<CountryDeploymentsDto>> findAllDeployments() {
+	public ResponseEntity<List<VCountryDeployments>> findAllDeployments() {
 		return ResponseEntity.ok(countryService.findAllDeployments());
+	}
+	
+	@GetMapping("/deployments/{countryId}")
+	public ResponseEntity<?> findDeploymentDetailsByCountryId(@PathVariable("countryId")long countryId) {
+		return ResponseEntity.ok(countryService.findDeploymentDetailsByCountryId(countryId));
 	}
 }

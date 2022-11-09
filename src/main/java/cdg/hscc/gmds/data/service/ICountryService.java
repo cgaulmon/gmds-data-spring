@@ -2,10 +2,11 @@ package cdg.hscc.gmds.data.service;
 
 import java.util.List;
 
-import cdg.hscc.gmds.data.dto.CountryDeploymentsDto;
 import cdg.hscc.gmds.data.dto.CountryDto;
 import cdg.hscc.gmds.data.dto.ManageCountryDto;
 import cdg.hscc.gmds.data.entity.Country;
+import cdg.hscc.gmds.data.entity.VCountryDeploymentDetail;
+import cdg.hscc.gmds.data.entity.VCountryDeployments;
 
 public interface ICountryService {
 
@@ -21,6 +22,8 @@ public interface ICountryService {
 	
 	List<ManageCountryDto> manage();
 	
-	List<CountryDeploymentsDto> findAllDeployments();
+	List<VCountryDeployments> findAllDeployments();
+
+	List<VCountryDeploymentDetail> findDeploymentDetailsByCountryId(long countryId);
 
 }

@@ -12,8 +12,10 @@ import lombok.Data;
 @Entity
 public class Unit {
 
+
 	@Id
-	private Long id;
+	@Column(name = "unit_id")
+	private Long unitId;
 	private String name;
 	@Column(name = "icon_link")
 	private String iconLink;
@@ -21,7 +23,5 @@ public class Unit {
 	private String status;
 	@Column(name="unit_type")
 	private String unitType;
-	@Column(name = "unit_id")
-	private Integer unitId;
 	
 }

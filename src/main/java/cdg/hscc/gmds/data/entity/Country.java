@@ -13,9 +13,8 @@ import lombok.Data;
 public class Country {
 
 	@Id
-	private Long id;
 	@Column(name="country_id")
-	private Integer countryId;
+	private Long countryId;
 	private String name;
 	@Column(name = "map_link")
 	private String mapLink;

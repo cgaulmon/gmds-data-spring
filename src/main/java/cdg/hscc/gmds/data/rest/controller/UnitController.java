@@ -1,4 +1,4 @@
-package cdg.hscc.gmds.data.controller;
+package cdg.hscc.gmds.data.rest.controller;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import cdg.hscc.gmds.data.service.IUnitService;
 import cdg.hscc.gmds.data.service.UnitService;
 
 @RestController
-@RequestMapping("/units")
+@RequestMapping("/api/units")
 public class UnitController {
 
 	private IUnitService unitService;
@@ -26,16 +26,21 @@ public class UnitController {
 	public ResponseEntity<List<UnitDto>> findAll() {
 		return ResponseEntity.ok(unitService.findAll());
 	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<UnitDto> findTroopById(@PathVariable("id")long id) {
+		return ResponseEntity.ok(unitService.findById(id));
+	}
+	
+	@GetMapping("/reserves")
+	public ResponseEntity<List<UnitDto>> findAllReserves() {
+		return ResponseEntity.ok(unitService.findAllActiveReserveUnits());
+	}
 
 	@GetMapping("/troops")
 	public ResponseEntity<List<UnitDto>> findAllTroops() {
 		return ResponseEntity.ok(unitService.findAllTroops());
 
-	}
-	
-	@GetMapping("/troops/{id}")
-	public ResponseEntity<UnitDto> findTroopById(@PathVariable("id")long id) {
-		return ResponseEntity.ok(unitService.findById(id));
 	}
 	
 	@GetMapping("/troops/status/active")
@@ -54,7 +59,7 @@ public class UnitController {
 		return ResponseEntity.ok(unitService.findAllEquipment());
 
 	}
-	
+
 	@GetMapping("/equipment/status/active")
 	public ResponseEntity<List<UnitDto>> findAllActiveReserveEquipment() {
 		return ResponseEntity.ok(unitService.findAllActiveReserveEquipment());
@@ -66,8 +71,4 @@ public class UnitController {
 		return ResponseEntity.ok(unitService.findAllActiveInactiveReserveEquipment());
 	}
 	
-	@GetMapping("/equipment/{id}")
-	public ResponseEntity<UnitDto> findEquipmentById(@PathVariable("id")long id) {
-		return ResponseEntity.ok(unitService.findById(id));
-	}
 }

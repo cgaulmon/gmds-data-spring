@@ -1,11 +1,18 @@
 package cdg.hscc.gmds.data.service;
 
+import java.time.Instant;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cdg.hscc.gmds.data.dto.DeploymentDto;
 import cdg.hscc.gmds.data.dto.UnitDto;
 import cdg.hscc.gmds.data.entity.Deployment;
 import cdg.hscc.gmds.data.repository.DeploymentRepository;
@@ -16,6 +23,8 @@ public class DeploymentService implements IDeploymentService {
 	private DeploymentRepository deploymentRepository;
 	private IUnitService unitService;
 	private ICountryService countryService;
+	@Autowired
+	private ModelMapper modelMapper;
 
 	public DeploymentService(DeploymentRepository deploymentRepository, UnitService unitService, CountryService countryService) {
 		super();
@@ -26,24 +35,28 @@ public class DeploymentService implements IDeploymentService {
 
 	@Override
 	@Transactional
-	public void deploy(int unitId, int countryId, int qty) {
+	public void deploy(DeploymentDto deployment) {
+		
+		int unitId = deployment.getUnitId();
+		
 		UnitDto unit = unitService.findById(unitId);
 		if (unitService.findById(unitId) == null) {
 			throw new IllegalArgumentException("Unit " + unit.getUnitId() + " does not exist!");
 		}
 
+		int countryId = deployment.getCountryId();
 		if (countryService.findById(countryId) == null) {
 			throw new IllegalArgumentException("Country " + countryId + " does not exist!");
 		}
 
 		Deployment entity = findByCountryAndUnit(countryId, unitId);
+		int qty = deployment.getUnitQty();
 		if(entity != null) {
 			entity.setUnitQty(entity.getUnitQty() + qty);
 		} else {
-			entity = new Deployment();
-			entity.setCountryId(countryId);
-			entity.setUnitId(unitId);
-			entity.setUnitQty(qty);
+			entity = convertToEntity(deployment);
+			entity.setLoadDate(Date.from(Instant.now()));
+			entity.setLoadDtm(Date.from(Instant.now()));
 		}
 		save(entity);
 
@@ -52,7 +65,7 @@ public class DeploymentService implements IDeploymentService {
 
 	}
 
-	public Deployment save(Deployment entity) {
+	private Deployment save(Deployment entity) {
 		return deploymentRepository.save(entity);
 	}
 
@@ -111,6 +124,24 @@ public class DeploymentService implements IDeploymentService {
 		} else {
 			return null;
 		}
+	}
+
+	@Override
+	public List<DeploymentDto> findAllByUserId(int userId) {
+		return deploymentRepository.findAllByUserId(userId)
+					.stream()
+					.map(this::convertToDTO)
+					.collect(Collectors.toList());
+	}
+
+	@Override
+	public DeploymentDto convertToDTO(Deployment deployment) {
+		return modelMapper.map(deployment, DeploymentDto.class);
+	}
+
+	@Override
+	public Deployment convertToEntity(DeploymentDto deployment) {
+		return modelMapper.map(deployment, Deployment.class);
 	}
 
 }

@@ -7,11 +7,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CountryDeploymentsDto {
 
-	private int countryId;
+	private Long id;
+	private Long countryId;
 	private String name;
 	private String mapLink;
-	private long numOfDeployments;
-	private long totalQty;
+	private Long numOfDeployments;
+	private Long totalQty;
 	
 	
 }

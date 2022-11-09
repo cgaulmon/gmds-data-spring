@@ -6,8 +6,9 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import cdg.hscc.gmds.data.dto.CountryDeploymentsDto;
 import cdg.hscc.gmds.data.entity.Country;
+import cdg.hscc.gmds.data.entity.VCountryDeploymentDetail;
+import cdg.hscc.gmds.data.entity.VCountryDeployments;
 import cdg.hscc.gmds.data.entity.VManageCountry;
 
 public interface CountryRepository extends JpaRepository<Country, Long> {
@@ -19,6 +20,10 @@ public interface CountryRepository extends JpaRepository<Country, Long> {
 	@Query("select v from VManageCountry v")
 	List<VManageCountry> findManageCountryList();
 	@Query("select m from VCountryDeployments m")
-	List<CountryDeploymentsDto> findAllDeployments();
+	List<VCountryDeployments> findAllDeployments();
+	@Query("select c from Country c order by c.name")
+	List<Country> findAll();
+	@Query("select d from VCountryDeploymentDetail d where d.countryId = :countryId")
+	List<VCountryDeploymentDetail> findAllDeploymentDetailsByCountryId(long countryId);
 	
 }

@@ -15,7 +15,7 @@ public class VManageCountry {
 	@Id
 	private Long id;
 	@Column(name = "country_id")
-	private int countryId;
+	private Long countryId;
 	@Column(name = "map_link")
 	private String mapLink;
 	private String name;

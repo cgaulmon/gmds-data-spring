@@ -16,8 +16,9 @@ import lombok.Data;
 public class VCountryDeployments {
 	
 	@Id
+	private Long id;
 	@Column(name = "country_id")
-	private Integer countryId;
+	private Long countryId;
 	private String name;
 	@Column(name = "map_link")
 	private String mapLink;
@@ -25,5 +26,7 @@ public class VCountryDeployments {
 	private Long numOfDeployments;
 	@Column(name = "total_qty")
 	private Long totalQty;
+	@Column(name = "status")
+	private String status;
 
 }

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class DeploymentDto {
 
 	private Long id;
+	private Integer userId;
 	private Integer countryId;
 	private Integer unitId;
 	private int unitQty;

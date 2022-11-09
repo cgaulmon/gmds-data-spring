@@ -13,6 +13,8 @@ public interface UnitRepository extends JpaRepository<Unit, Long> {
 	List<Unit> findAllTroops();
 	@Query("select u from Unit u where UPPER(u.unitType) = 'E'")
 	List<Unit> findAllEquipment();
+	@Query("select u from Unit u where u.qty > 0 and UPPER(u.status) = 'A'")
+	List<Unit> findAllActiveReserveUnits();
 	@Query("select u from Unit u where u.qty > 0 and UPPER(u.status) = 'A' and u.unitType = 'T'")
 	List<Unit> findAllActiveReserveTroops();
 	@Query("select u from Unit u where u.qty > 0 and UPPER(u.status) = 'I' and u.unitType = 'T'")

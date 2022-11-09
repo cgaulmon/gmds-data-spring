@@ -6,17 +6,15 @@ import lombok.Data;
 @Data
 public class ManageCountryDto {
 
-	private Long id;
-	private Integer countryId;
+	private Long countryId;
 	private String name;
 	private String mapLink;
 	private String status;
 	private boolean hasDeployedUnits;
 
 	public ManageCountryDto(VManageCountry vm) {
-		this.id = vm.getId();
 		this.countryId = vm.getCountryId();
-		this.name = vm.getMapLink();
+		this.name = vm.getName();
 		this.status = vm.getStatus();
 		this.mapLink = vm.getMapLink();
 		this.hasDeployedUnits = (vm.getDeployCount() > 0);

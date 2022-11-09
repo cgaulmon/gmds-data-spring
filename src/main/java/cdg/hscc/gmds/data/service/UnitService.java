@@ -43,7 +43,7 @@ public class UnitService implements IUnitService {
 
 	@Override
 	public List<UnitDto> findAllActiveReserveUnits() {
-		return unitRepository.findAllActiveReserveTroops().
+		return unitRepository.findAllActiveReserveUnits().
 				stream().map(this::convertToDto)
 				.collect(Collectors.toList());
 	}
